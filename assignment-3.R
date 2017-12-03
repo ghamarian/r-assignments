@@ -198,10 +198,19 @@ index.ttest <-function(x,y,nsim){
  
 }
 
-
 index.ttest(CSFI, TFI, 1000)
 
+jacknife.estimate <-function(x,y) {
+  xlen <- length(x)
+  theta.hat = mean(x) - mean(y)
+  theta.jack = numeric(xlen)
+  for (i in 1:length(x))
+    theta.jack[i] <- mean(x[-i]) - mean(y)
+  bias <- (xlen - 1) * (mean(theta.jack) - theta.hat)
+  bias
+}
 
+jacknife.estimate(TFI, CSFI)
 
 
 ####################################################################################
